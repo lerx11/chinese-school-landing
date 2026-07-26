@@ -1,0 +1,2877 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alien Chinese — школа китайского языка для детей 5–12 лет. Индивидуальная траектория, игровая механика, результаты, которыми гордятся.">
+    <meta name="keywords" content="китайский язык для детей, школа китайского, обучение детей, Alien Chinese, Studycat">
+    <meta name="author" content="Alien Chinese">
+    <meta property="og:title" content="Alien Chinese — китайский как космос: без границ">
+    <meta property="og:description" content="Для детей 5–12 лет. Влюбляем в язык с первого урока.">
+    <meta property="og:type" content="website">
+    <title>Alien Chinese — Школа китайского языка для детей 5–12 лет</title>
+
+    <!-- Подключение шрифтов Google Fonts: Inter (основной) и Noto Sans SC (для иероглифов) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Иконки Font Awesome через CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* =========================================================
+           ДИЗАЙН-СИСТЕМА: ПЕРЕМЕННЫЕ
+           ========================================================= */
+        :root {
+            --bg: #0B0E1A;            /* основной фон */
+            --bg-2: #0E1322;          /* чуть светлее для чередования секций */
+            --card: #141A2B;          /* карточки */
+            --card-2: #1A2236;        /* карточки при ховере */
+            --accent: #E84142;        /* красный акцент */
+            --accent-2: #FF6B35;      /* оранжевый (для градиента) */
+            --gold: #F9CA5C;          /* золото */
+            --white: #FFFFFF;
+            --text-secondary: #A0B0C0;
+            --gradient: linear-gradient(135deg, #E84142 0%, #FF6B35 100%);
+            --gradient-gold: linear-gradient(135deg, #F9CA5C 0%, #E8A838 100%);
+            --line: rgba(255, 255, 255, 0.08);
+            --line-strong: rgba(255, 255, 255, 0.16);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-lg: 24px;
+            --max-width: 1280px;
+            --transition: 0.3s ease;
+            --shadow-card: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+            --shadow-accent: 0 20px 40px -12px rgba(232, 65, 66, 0.45);
+        }
+
+        /* =========================================================
+           СБРОС И БАЗОВЫЕ СТИЛИ
+           ========================================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px; /* отступ под фиксированную шапку при якорной навигации */
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Изолируем body от прокрутки при открытии модалок */
+        body.locked {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Скрывает визуально, но оставляет доступным для скринридеров */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* =========================================================
+           ОБЩИЕ УТИЛИТЫ
+           ========================================================= */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section__eyebrow {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        .section__title {
+            font-size: clamp(28px, 5vw, 44px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .section__subtitle {
+            font-size: clamp(15px, 2vw, 18px);
+            color: var(--text-secondary);
+            max-width: 620px;
+            margin: 0 auto 48px;
+        }
+
+        .section__head {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .text-gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .text-gold {
+            color: var(--gold);
+        }
+
+        /* Градиентная линия-разделитель между блоками */
+        .divider {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent 0%, var(--line-strong) 50%, transparent 100%);
+            margin: 0;
+            border: 0;
+        }
+
+        /* =========================================================
+           КНОПКИ
+           ========================================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 999px;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+            will-change: transform;
+        }
+
+        .btn--primary {
+            background: var(--gradient);
+            color: var(--white);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn--primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 50px -12px rgba(232, 65, 66, 0.6);
+        }
+
+        .btn--ghost {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--white);
+            border: 1px solid var(--line-strong);
+        }
+
+        .btn--ghost:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        .btn--gold {
+            background: var(--gradient-gold);
+            color: #1A1206;
+            font-weight: 700;
+        }
+
+        .btn--gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -12px rgba(249, 202, 92, 0.5);
+        }
+
+        .btn--block {
+            width: 100%;
+        }
+
+        /* =========================================================
+           ШАПКА САЙТА
+           ========================================================= */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(11, 14, 26, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            transition: background var(--transition);
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            gap: 16px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: -0.01em;
+        }
+
+        .logo__icon {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            font-size: 22px;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            border-radius: 12px;
+            color: var(--white);
+            box-shadow: 0 8px 20px -6px rgba(232, 65, 66, 0.6);
+        }
+
+        .logo__text {
+            white-space: nowrap;
+        }
+
+        .nav {
+            display: none; /* скрыто на мобильных, показывается на десктопе */
+        }
+
+        .nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            position: relative;
+            padding: 6px 2px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--white);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .header__contacts {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-icon {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--line);
+            font-size: 17px;
+            transition: transform var(--transition), background var(--transition), border-color var(--transition);
+        }
+
+        .contact-icon:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-icon--tg:hover {
+            background: #229ED9;
+            border-color: #229ED9;
+            color: #fff;
+        }
+
+        .contact-icon--wa:hover {
+            background: #25D366;
+            border-color: #25D366;
+            color: #fff;
+        }
+
+        /* Tooltip — всплывающая подсказка */
+        .contact-icon::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-2);
+            color: var(--white);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-4px);
+            transition: opacity var(--transition), transform var(--transition);
+            border: 1px solid var(--line);
+        }
+
+        .contact-icon:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Бургер для мобильной навигации */
+        .burger {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .burger span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--white);
+            margin: 0 auto;
+            transition: transform var(--transition), opacity var(--transition);
+        }
+
+        .burger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .burger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(11, 14, 26, 0.98);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 30px 20px;
+            transform: translateX(100%);
+            transition: transform var(--transition);
+            z-index: 99;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+        }
+
+        /* =========================================================
+           HERO — космическая обложка
+           ========================================================= */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding: 120px 0 80px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: radial-gradient(ellipse at top, #14193A 0%, var(--bg) 55%);
+        }
+
+        /* Слой со звёздами (несколько слоёв для эффекта параллакса) */
+        .stars,
+        .stars::before,
+        .stars::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            content: '';
+            pointer-events: none;
+        }
+
+        .stars {
+            background-image:
+                radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+                radial-gradient(1px 1px at 60px 120px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 200px 50px, #fff, transparent),
+                radial-gradient(1px 1px at 280px 160px, #fff, transparent),
+                radial-gradient(1px 1px at 350px 30px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 420px 200px, #fff, transparent),
+                radial-gradient(1px 1px at 500px 90px, #fff, transparent),
+                radial-gradient(1px 1px at 580px 140px, #fff, transparent),
+                radial-gradient(1px 1px at 660px 40px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 740px 180px, #fff, transparent),
+                radial-gradient(1px 1px at 820px 110px, #fff, transparent),
+                radial-gradient(1px 1px at 900px 60px, #fff, transparent),
+                radial-gradient(1px 1px at 980px 200px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 1060px 90px, #fff, transparent),
+                radial-gradient(1px 1px at 1140px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 1200px 240px;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        .stars::before {
+            background-image:
+                radial-gradient(1px 1px at 50px 100px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 150px 200px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 250px 50px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 380px 180px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 480px 110px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 620px 220px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 720px 70px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 880px 160px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 1000px 40px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 1100px 200px, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 1200px 280px;
+            animation: twinkle 6s ease-in-out infinite alternate-reverse;
+            animation-delay: -2s;
+        }
+
+        .stars::after {
+            background-image:
+                radial-gradient(2px 2px at 100px 70px, rgba(249, 202, 92, 0.9), transparent),
+                radial-gradient(1.5px 1.5px at 400px 180px, rgba(255, 255, 255, 0.95), transparent),
+                radial-gradient(2px 2px at 700px 30px, rgba(232, 65, 66, 0.7), transparent),
+                radial-gradient(1.5px 1.5px at 1000px 150px, rgba(255, 255, 255, 0.95), transparent);
+            background-repeat: repeat;
+            background-size: 1200px 240px;
+            animation: twinkle 5s ease-in-out infinite alternate;
+            animation-delay: -1s;
+        }
+
+        @keyframes twinkle {
+            0%   { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* Декоративный иероглиф 星 (звезда) на фоне */
+        .hero__decoration {
+            position: absolute;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            color: var(--gold);
+            opacity: 0.06;
+            user-select: none;
+            pointer-events: none;
+            font-size: clamp(280px, 50vw, 640px);
+            line-height: 1;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .hero__inner {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero__content {
+            max-width: 640px;
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(249, 202, 92, 0.1);
+            border: 1px solid rgba(249, 202, 92, 0.3);
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero__badge i {
+            font-size: 12px;
+        }
+
+        .hero__title {
+            font-size: clamp(36px, 7vw, 64px);
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .hero__subtitle {
+            font-size: clamp(16px, 2.2vw, 20px);
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+
+        .hero__cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .hero__stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--line);
+        }
+
+        .hero__stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .hero__stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+
+        /* Парящая ракета (SVG внутри контейнера с анимацией) */
+        .hero__rocket {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 320px;
+            animation: floatRocket 5s ease-in-out infinite;
+        }
+
+        @keyframes floatRocket {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50%      { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .hero__rocket svg {
+            width: clamp(220px, 30vw, 340px);
+            height: auto;
+            filter: drop-shadow(0 30px 40px rgba(232, 65, 66, 0.35));
+        }
+
+        /* Дым/хвост из сопла ракеты */
+        .hero__rocket::after {
+            content: '';
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(ellipse at top, rgba(255, 200, 100, 0.5), transparent 70%);
+            filter: blur(8px);
+            animation: flame 0.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes flame {
+            0%   { opacity: 0.6; transform: translateX(-50%) scaleY(0.9); }
+            100% { opacity: 1; transform: translateX(-50%) scaleY(1.1); }
+        }
+
+        /* =========================================================
+           БЛОК 2: ПРЕИМУЩЕСТВА
+           ========================================================= */
+        .advantages {
+            display: grid;
+            gap: 20px;
+        }
+
+        .advantage-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: transform var(--transition), border-color var(--transition), background var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity var(--transition);
+            z-index: 0;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(232, 65, 66, 0.4);
+            background: var(--card-2);
+        }
+
+        .advantage-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .advantage-card__icon {
+            width: 60px;
+            height: 60px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(232, 65, 66, 0.12);
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 20px;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .advantage-card:hover .advantage-card__icon {
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        .advantage-card__title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .advantage-card__text {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================
+           БЛОК 3: ДОРОЖНАЯ КАРТА — 8 ПЛАНЕТ
+           ========================================================= */
+        .roadmap {
+            position: relative;
+        }
+
+        .roadmap__track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 30px 4px 50px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) transparent;
+        }
+
+        .roadmap__track::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .roadmap__track::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+        }
+
+        .roadmap__track::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 999px;
+        }
+
+        .planet {
+            flex: 0 0 220px;
+            scroll-snap-align: start;
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            transition: transform var(--transition), border-color var(--transition);
+        }
+
+        .planet:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+        }
+
+        .planet__orb {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #5b6cd6, #1c2347 70%);
+            box-shadow: inset -10px -10px 30px rgba(0,0,0,0.4), 0 14px 30px -10px rgba(0,0,0,0.7);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Noto Sans SC', sans-serif;
+            transition: transform var(--transition);
+        }
+
+        /* Кольцо вокруг планеты (орбита) */
+        .planet__orb::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border: 1px dashed rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            animation: spin 12s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        .planet:hover .planet__orb {
+            transform: scale(1.08);
+        }
+
+        .planet__title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .planet__meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Каждой планете свой оттенок */
+        .planet:nth-child(1) .planet__orb { background: radial-gradient(circle at 30% 30%, #ff8a8a, #8a1f20 70%); }
+        .planet:nth-child(2) .planet__orb { background: radial-gradient(circle at 30% 30%, #9b8cff, #2d2470 70%); }
+        .planet:nth-child(3) .planet__orb { background: radial-gradient(circle at 30% 30%, #8ce0ff, #1d5a7a 70%); }
+        .planet:nth-child(4) .planet__orb { background: radial-gradient(circle at 30% 30%, #ffd28c, #8a5a1c 70%); }
+
+        /* 5-я планета — золотая, с увеличением при ховере */
+        .planet--gold {
+            border-color: rgba(249, 202, 92, 0.5);
+            background: linear-gradient(180deg, rgba(249, 202, 92, 0.08), var(--card));
+        }
+
+        .planet--gold .planet__orb {
+            background: radial-gradient(circle at 30% 30%, #ffe9a8, #c79425 70%);
+            box-shadow: inset -10px -10px 30px rgba(120, 70, 0, 0.4), 0 0 40px rgba(249, 202, 92, 0.45);
+            color: #3a2a05;
+        }
+
+        .planet--gold:hover {
+            transform: translateY(-12px) scale(1.04);
+            border-color: var(--gold);
+        }
+
+        .planet--gold:hover .planet__orb {
+            transform: scale(1.18);
+        }
+
+        .planet__badge {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .planet:nth-child(6) .planet__orb { background: radial-gradient(circle at 30% 30%, #b0ff8c, #2c6e1c 70%); }
+        .planet:nth-child(7) .planet__orb { background: radial-gradient(circle at 30% 30%, #ff8cd0, #7a1d5a 70%); }
+        .planet:nth-child(8) .planet__orb { background: radial-gradient(circle at 30% 30%, #8cffe6, #1c6e5a 70%); }
+
+        /* =========================================================
+           БЛОК 4: ПРОГРАММА
+           ========================================================= */
+        .program {
+            display: grid;
+            gap: 20px;
+        }
+
+        .program-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            transition: transform var(--transition), border-color var(--transition);
+        }
+
+        .program-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 202, 92, 0.4);
+        }
+
+        .program-card__icon {
+            flex: 0 0 52px;
+            width: 52px;
+            height: 52px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(249, 202, 92, 0.12);
+            color: var(--gold);
+            font-size: 20px;
+        }
+
+        .program-card__title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .program-card__text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Счётчик учеников */
+        .counter {
+            margin-top: 48px;
+            padding: 36px 24px;
+            text-align: center;
+            background: var(--gradient);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .counter::before {
+            content: '星';
+            position: absolute;
+            font-family: 'Noto Sans SC', sans-serif;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 220px;
+            color: rgba(255, 255, 255, 0.1);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .counter__value {
+            font-size: clamp(40px, 7vw, 64px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .counter__text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.92);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================================================
+           БЛОК 5: ПАРТНЁР STUDYCAT
+           ========================================================= */
+        .partner {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 40px 28px;
+            display: grid;
+            gap: 32px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(249, 202, 92, 0.18), transparent 70%);
+            pointer-events: none;
+        }
+
+        .partner__logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 28px;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+        .partner__logo-mark {
+            width: 56px;
+            height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: var(--gradient-gold);
+            color: #1A1206;
+            font-size: 26px;
+            box-shadow: 0 12px 28px -10px rgba(249, 202, 92, 0.5);
+        }
+
+        .partner__title {
+            font-size: clamp(22px, 3vw, 30px);
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 14px;
+        }
+
+        .partner__text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .partner__highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           БЛОК 6: КЕЙСЫ — glassmorphism карточки
+           ========================================================= */
+        .cases {
+            display: grid;
+            gap: 20px;
+        }
+
+        .case-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: transform var(--transition), border-color var(--transition);
+        }
+
+        .case-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(249, 202, 92, 0.35);
+        }
+
+        .case-card__head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .case-card__avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--white);
+            flex: 0 0 56px;
+        }
+
+        .case-card__avatar--1 { background: linear-gradient(135deg, #E84142, #FF6B35); }
+        .case-card__avatar--2 { background: linear-gradient(135deg, #F9CA5C, #E8A838); color: #1A1206; }
+        .case-card__avatar--3 { background: linear-gradient(135deg, #6a8cff, #2c3a90); }
+
+        .case-card__name {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .case-card__age {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .case-card__quote {
+            font-size: 15px;
+            color: var(--text-secondary);
+            font-style: italic;
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 20px;
+        }
+
+        .case-card__quote::before {
+            content: '\201C';
+            position: absolute;
+            left: 0;
+            top: -8px;
+            font-size: 36px;
+            color: var(--accent);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .case-card__achievement {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(249, 202, 92, 0.1);
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           БЛОК 7: ТАРИФЫ
+           ========================================================= */
+        .pricing {
+            display: grid;
+            gap: 20px;
+        }
+
+        .price-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition), border-color var(--transition);
+            position: relative;
+        }
+
+        .price-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(232, 65, 66, 0.35);
+        }
+
+        .price-card--featured {
+            border-color: var(--gold);
+            background: linear-gradient(180deg, rgba(249, 202, 92, 0.08), var(--card));
+        }
+
+        .price-card__tag {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-gold);
+            color: #1A1206;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .price-card__name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .price-card__lessons {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+        }
+
+        .price-card__price {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .price-card__note {
+            font-size: 13px;
+            color: var(--gold);
+            margin-bottom: 24px;
+            min-height: 18px;
+        }
+
+        .price-card__list {
+            margin-bottom: 28px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .price-card__list li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .price-card__list i {
+            color: var(--accent);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .price-card--featured .price-card__list i {
+            color: var(--gold);
+        }
+
+        .price-card .btn {
+            margin-top: auto;
+        }
+
+        /* =========================================================
+           БЛОК 8: FAQ + ФОРМА
+           ========================================================= */
+        .faq-form {
+            display: grid;
+            gap: 48px;
+        }
+
+        /* FAQ-аккордеон */
+        .faq__item {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--card);
+            overflow: hidden;
+            transition: border-color var(--transition);
+        }
+
+        .faq__item:hover {
+            border-color: rgba(232, 65, 66, 0.3);
+        }
+
+        .faq__item.open {
+            border-color: var(--accent);
+        }
+
+        .faq__question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            width: 100%;
+            padding: 20px 22px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+            color: var(--white);
+            transition: color var(--transition);
+        }
+
+        .faq__question:hover {
+            color: var(--accent);
+        }
+
+        .faq__icon {
+            flex: 0 0 24px;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(232, 65, 66, 0.15);
+            color: var(--accent);
+            font-size: 12px;
+            transition: transform var(--transition), background var(--transition);
+        }
+
+        .faq__item.open .faq__icon {
+            transform: rotate(45deg);
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        .faq__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq__answer-inner {
+            padding: 0 22px 22px;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        /* Форма */
+        .form-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '语';
+            position: absolute;
+            font-family: 'Noto Sans SC', sans-serif;
+            right: -30px;
+            bottom: -60px;
+            font-size: 220px;
+            color: rgba(255, 255, 255, 0.03);
+            font-weight: 900;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .form-card__title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .form-card__subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: inherit;
+            font-size: 15px;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line-strong);
+            border-radius: var(--radius-sm);
+            transition: border-color var(--transition), background var(--transition);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-control::placeholder {
+            color: rgba(160, 176, 192, 0.5);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        textarea.form-control {
+            min-height: 110px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        /* Радио-кнопки выбора способа связи */
+        .radio-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .radio-pill {
+            position: relative;
+            display: block;
+            cursor: pointer;
+        }
+
+        .radio-pill input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .radio-pill__box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 14px;
+            border: 1px solid var(--line-strong);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all var(--transition);
+        }
+
+        .radio-pill input:checked + .radio-pill__box {
+            border-color: var(--accent);
+            background: rgba(232, 65, 66, 0.1);
+            color: var(--white);
+        }
+
+        .radio-pill input:focus-visible + .radio-pill__box {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Подсказка с подставленным контактом */
+        .contact-hint {
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--gold);
+            min-height: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-card .btn {
+            margin-top: 6px;
+        }
+
+        .form-card__agree {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 14px;
+            text-align: center;
+            position: relative;
+        }
+
+        .form-card__agree a {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        /* =========================================================
+           ПОДВАЛ
+           ========================================================= */
+        .footer {
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--line);
+            background: var(--bg-2);
+            position: relative;
+        }
+
+        .footer__top {
+            display: grid;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .footer__col--brand p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 14px;
+            max-width: 320px;
+        }
+
+        .footer__title {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer__contacts li,
+        .footer__nav li {
+            margin-bottom: 10px;
+        }
+
+        .footer__contacts a,
+        .footer__nav a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer__contacts a:hover,
+        .footer__nav a:hover {
+            color: var(--white);
+        }
+
+        .footer__social {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .footer__bottom {
+            padding-top: 24px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================
+           МОДАЛЬНЫЕ ОКНА
+           ========================================================= */
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(7, 9, 18, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .modal.open {
+            display: flex;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .modal__dialog {
+            background: var(--card);
+            border: 1px solid var(--line-strong);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to   { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal__close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .modal__close:hover {
+            background: rgba(232, 65, 66, 0.2);
+            color: var(--white);
+        }
+
+        .modal__icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: rgba(37, 211, 102, 0.15);
+            color: #25D366;
+        }
+
+        .modal__icon--info {
+            background: rgba(249, 202, 92, 0.15);
+            color: var(--gold);
+        }
+
+        .modal__title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .modal__text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .modal__text p {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .modal__text ul {
+            text-align: left;
+            margin: 12px 0;
+            padding-left: 0;
+        }
+
+        .modal__text li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .modal__text li i {
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        /* =========================================================
+           АНИМАЦИЯ ПОЯВЛЕНИЯ БЛОКОВ ПРИ СКРОЛЛЕ
+           ========================================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            will-change: opacity, transform;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Декоративные водяные знаки — иероглифы */
+        .watermark {
+            position: absolute;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            color: var(--gold);
+            opacity: 0.025;
+            user-select: none;
+            pointer-events: none;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        /* =========================================================
+           АДАПТИВНОСТЬ — БРЕЙКПОИНТЫ 768 / 1024 / 1440
+           ========================================================= */
+
+        /* Планшеты и выше (768px) */
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 32px;
+            }
+
+            .section {
+                padding: 100px 0;
+            }
+
+            .nav {
+                display: flex;
+                gap: 28px;
+            }
+
+            .burger {
+                display: none;
+            }
+
+            .hero__inner {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+
+            .advantages {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .program {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .partner {
+                grid-template-columns: 0.9fr 1.1fr;
+                padding: 48px 40px;
+            }
+
+            .cases {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .pricing {
+                grid-template-columns: repeat(3, 1fr);
+                align-items: stretch;
+            }
+
+            .faq-form {
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+
+            .footer__top {
+                grid-template-columns: 1.4fr 1fr 1fr;
+            }
+
+            .footer__bottom {
+                padding-top: 28px;
+            }
+        }
+
+        /* Десктоп (1024px) */
+        @media (min-width: 1024px) {
+            .section {
+                padding: 120px 0;
+            }
+
+            .container {
+                padding: 0 40px;
+            }
+
+            .hero {
+                padding: 140px 0 100px;
+            }
+
+            .hero__title {
+                font-size: 64px;
+            }
+
+            .section__title {
+                font-size: 44px;
+            }
+        }
+
+        /* Большие экраны (1440px) */
+        @media (min-width: 1440px) {
+            .container {
+                padding: 0 48px;
+            }
+        }
+
+        /* Уважение к настройкам пользователя: уменьшение анимаций */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Фокус-стили для доступности с клавиатуры */
+        a:focus-visible,
+        button:focus-visible,
+        .faq__question:focus-visible,
+        .contact-icon:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 3px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================
+         ШАПКА САЙТА
+         ========================================================= -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="#hero" class="logo" aria-label="Alien Chinese — на главную">
+                <span class="logo__icon" aria-hidden="true">语</span>
+                <span class="logo__text">Alien Chinese</span>
+            </a>
+
+            <nav class="nav" aria-label="Основная навигация">
+                <a href="#advantages">О нас</a>
+                <a href="#program">Программа</a>
+                <a href="#pricing">Тарифы</a>
+                <a href="#cases">Отзывы</a>
+                <a href="#faq">Контакты</a>
+            </nav>
+
+            <div class="header__contacts">
+                <a href="https://t.me/Lex_88"
+                   class="contact-icon contact-icon--tg"
+                   data-tooltip="Telegram: @Lex_88"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Написать в Telegram">
+                    <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/79150135722"
+                   class="contact-icon contact-icon--wa"
+                   data-tooltip="WhatsApp: +7 (915) 013-57-22"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Написать в WhatsApp">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                </a>
+                <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Мобильная навигация">
+        <a href="#advantages">О нас</a>
+        <a href="#program">Программа</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#cases">Отзывы</a>
+        <a href="#faq">Контакты</a>
+        <a href="#form" style="color: var(--gold); margin-top: 14px;">Записаться на пробный урок →</a>
+    </nav>
+
+    <main>
+
+        <!-- =========================================================
+             БЛОК 1: HERO
+             ========================================================= -->
+        <section class="hero" id="hero">
+            <div class="stars" aria-hidden="true"></div>
+            <div class="hero__decoration" aria-hidden="true">星</div>
+
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <span class="hero__badge">
+                        <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+                        Набор открыт · сезон 2026
+                    </span>
+                    <h1 class="hero__title">
+                        Китайский — как космос: <span class="text-gradient">без границ</span>
+                    </h1>
+                    <p class="hero__subtitle">
+                        Для детей 5–12 лет. Влюбляем в язык с первого урока —
+                        через игру, историю и поддержку наставника.
+                    </p>
+                    <div class="hero__cta">
+                        <a href="#form" class="btn btn--primary">
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                            Записаться на пробный урок
+                        </a>
+                        <a href="https://t.me/Lex_88" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+                            Задать вопрос
+                        </a>
+                    </div>
+
+                    <div class="hero__stats">
+                        <div>
+                            <div class="hero__stat-value text-gradient">300+</div>
+                            <div class="hero__stat-label">учеников проходят путь</div>
+                        </div>
+                        <div>
+                            <div class="hero__stat-value text-gold">8</div>
+                            <div class="hero__stat-label">уровней-планет</div>
+                        </div>
+                        <div>
+                            <div class="hero__stat-value">5–12</div>
+                            <div class="hero__stat-label">лет — наш возраст</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Парящая ракета (SVG) -->
+                <div class="hero__rocket" aria-hidden="true">
+                    <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ракета летит в космосе">
+                        <defs>
+                            <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#FFFFFF"/>
+                                <stop offset="100%" stop-color="#C7D2E0"/>
+                            </linearGradient>
+                            <linearGradient id="noseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#E84142"/>
+                                <stop offset="100%" stop-color="#FF6B35"/>
+                            </linearGradient>
+                            <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#F9CA5C"/>
+                                <stop offset="60%" stop-color="#FF6B35"/>
+                                <stop offset="100%" stop-color="#E84142"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Иллюминатор -->
+                        <circle cx="100" cy="115" r="20" fill="#0B0E1A" stroke="#E84142" stroke-width="4"/>
+                        <circle cx="100" cy="115" r="10" fill="#8ce0ff" opacity="0.7"/>
+
+                        <!-- Корпус ракеты -->
+                        <path d="M 70 90 Q 70 30 100 20 Q 130 30 130 90 L 130 180 L 70 180 Z"
+                              fill="url(#bodyGrad)" stroke="#A0B0C0" stroke-width="2"/>
+
+                        <!-- Нос ракеты -->
+                        <path d="M 70 90 Q 70 30 100 20 Q 130 30 130 90 Z" fill="url(#noseGrad)"/>
+
+                        <!-- Крылья -->
+                        <path d="M 70 150 L 40 200 L 70 180 Z" fill="#E84142"/>
+                        <path d="M 130 150 L 160 200 L 130 180 Z" fill="#E84142"/>
+
+                        <!-- Полосы на корпусе -->
+                        <rect x="70" y="135" width="60" height="6" fill="#E84142" opacity="0.8"/>
+                        <rect x="70" y="155" width="60" height="3" fill="#A0B0C0" opacity="0.6"/>
+
+                        <!-- Сопло -->
+                        <path d="M 75 180 L 70 205 L 130 205 L 125 180 Z" fill="#3a3a4a"/>
+
+                        <!-- Пламя -->
+                        <path d="M 75 205 Q 80 240 100 270 Q 120 240 125 205 Z" fill="url(#flameGrad)"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- =========================================================
+             БЛОК 2: ПРЕИМУЩЕСТВА
+             ========================================================= -->
+        <section class="section" id="advantages">
+            <span class="watermark" style="top: 10%; left: -2%; font-size: 240px;" aria-hidden="true">学</span>
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="section__eyebrow">Почему мы</span>
+                    <h2 class="section__title">Не просто уроки, а <span class="text-gold">маршрут</span></h2>
+                    <p class="section__subtitle">
+                        Мы ведём ребёнка по понятной траектории — от первого слова
+                        до уверенного общения. Каждый шаг осязаем и виден родителям.
+                    </p>
+                </div>
+
+                <div class="advantages">
+                    <article class="advantage-card reveal">
+                        <div class="advantage-card__icon"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></div>
+                        <h3 class="advantage-card__title">Индивидуальная траектория</h3>
+                        <p class="advantage-card__text">
+                            Подстраиваем темп под интересы и характер ребёнка.
+                            Никаких шаблонных программ — только живой, осмысленный маршрут.
+                        </p>
+                    </article>
+
+                    <article class="advantage-card reveal">
+                        <div class="advantage-card__icon"><i class="fa-solid fa-gamepad" aria-hidden="true"></i></div>
+                        <h3 class="advantage-card__title">Игровая механика</h3>
+                        <p class="advantage-card__text">
+                            Уроки превращаются в квест: открываем планеты, собираем
+                            звёзды, прокачиваем героя. Дети сами рвутся на занятие.
+                        </p>
+                    </article>
+
+                    <article class="advantage-card reveal">
+                        <div class="advantage-card__icon"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
+                        <h3 class="advantage-card__title">Результат = гордость</h3>
+                        <p class="advantage-card__text">
+                            Каждый уровень завершается сертификатом и рассказом
+                            для родителей. Ребёнок видит свой прогресс — и верит в себя.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- =========================================================
+             БЛОК 3: ДОРОЖНАЯ КАРТА — 8 УРОВНЕЙ-ПЛАНЕТ
+             ========================================================= -->
+        <section class="section" id="roadmap">
+            <span class="watermark" style="bottom: 5%; right: -3%; font-size: 280px;" aria-hidden="true">路</span>
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="section__eyebrow">Маршрут</span>
+                    <h2 class="section__title">8 уровней — 8 <span class="text-gradient">планет</span></h2>
+                    <p class="section__subtitle">
+                        Прокручивайте вправо, чтобы рассмотреть все планеты.
+                        На мобильном — удобный вертикальный список.
+                    </p>
+                </div>
+
+                <div class="roadmap reveal">
+                    <div class="roadmap__track" role="list">
+                        <!-- 1. Цвет -->
+                        <article class="planet" role="listitem">
+                            <div class="planet__orb">1</div>
+                            <h3 class="planet__title">Цвет</h3>
+                            <p class="planet__meta">30 слов · 8 тем</p>
+                        </article>
+                        <!-- 2. Животные -->
+                        <article class="planet" role="listitem">
+                            <div class="planet__orb">2</div>
+                            <h3 class="planet__title">Животные</h3>
+                            <p class="planet__meta">45 слов · 12 тем</p>
+                        </article>
+                        <!-- 3. Семья -->
+                        <article class="planet" role="listitem">
+                            <div class="planet__orb">3</div>
+                            <h3 class="planet__title">Семья</h3>
+                            <p class="planet__meta">40 слов · 10 тем</p>
+                        </article>
+                        <!-- 4. Еда -->
+                        <article class="planet" role="listitem">
+                            <div class="planet__orb">4</div>
+                            <h3 class="planet__title">Еда</h3>
+                            <p class="planet__meta">55 слов · 14 тем</p>
+                        </article>
+                        <!-- 5. Школа — золотая планета -->
+                        <article class="planet planet--gold" role="listitem">
+                            <div class="planet__orb">5</div>
+                            <h3 class="planet__title">Школа</h3>
+                            <p class="planet__meta">60 слов · 16 тем</p>
+                            <span class="planet__badge">★ Поворотный уровень</span>
+                        </article>
+                        <!-- 6. Путешествия -->
+                        <article class="planet" role="listitem">
+                            <div class="planet__orb">6</div>
+                            <h3 class="planet__title">Путешествия</h3>
+                            <p class="planet__meta">70 слов · 18 тем</p>
+                        </article>
+                        <!-- 7. Сказки -->
+                        <article class="planet" role="listitem">
+                            <div class="planet__orb">7</div>
+                            <h3 class="planet__title">Сказки</h3>
+                            <p class="planet__meta">85 слов · 12 историй</p>
+                        </article>
+                        <!-- 8. Будущее -->
+                        <article class="planet" role="listitem">
+                            <div class="planet__orb">8</div>
+                            <h3 class="planet__title">Будущее</h3>
+                            <p class="planet__meta">100+ слов · HSK 2</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- =========================================================
+             БЛОК 4: ПРОГРАММА
+             ========================================================= -->
+        <section class="section" id="program" style="background: var(--bg-2);">
+            <span class="watermark" style="top: 12%; right: -2%; font-size: 260px;" aria-hidden="true">程</span>
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="section__eyebrow">Что входит</span>
+                    <h2 class="section__title">Программа, за которой <span class="text-gold">видно заботу</span></h2>
+                    <p class="section__subtitle">
+                        Каждый элемент работает на результат и удовольствие ребёнка.
+                        Родители всегда в курсе и спокойны.
+                    </p>
+                </div>
+
+                <div class="program">
+                    <article class="program-card reveal">
+                        <div class="program-card__icon"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i></div>
+                        <div>
+                            <h3 class="program-card__title">2 урока в неделю</h3>
+                            <p class="program-card__text">Оптимальный ритм: ребёнок не устаёт и не успевает забыть материал.</p>
+                        </div>
+                    </article>
+
+                    <article class="program-card reveal">
+                        <div class="program-card__icon"><i class="fa-solid fa-map" aria-hidden="true"></i></div>
+                        <div>
+                            <h3 class="program-card__title">Карта прогресса</h3>
+                            <p class="program-card__text">Видим путь от первой планеты до финальной. Каждая планета = достижения.</p>
+                        </div>
+                    </article>
+
+                    <article class="program-card reveal">
+                        <div class="program-card__icon"><i class="fa-solid fa-certificate" aria-hidden="true"></i></div>
+                        <div>
+                            <h3 class="program-card__title">Сертификаты</h3>
+                            <p class="program-card__text">После каждого уровня — именной сертификат, который приятно показать.</p>
+                        </div>
+                    </article>
+
+                    <article class="program-card reveal">
+                        <div class="program-card__icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+                        <div>
+                            <h3 class="program-card__title">Отчёты родителям</h3>
+                            <p class="program-card__text">Раз в месяц — понятный отчёт: что освоили, где задержались, что дальше.</p>
+                        </div>
+                    </article>
+
+                    <article class="program-card reveal">
+                        <div class="program-card__icon"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></div>
+                        <div>
+                            <h3 class="program-card__title">Домашние задания с проверкой</h3>
+                            <p class="program-card__text">ДЗ без слёз — короткие игровые задания с обратной связью от наставника.</p>
+                        </div>
+                    </article>
+
+                    <article class="program-card reveal">
+                        <div class="program-card__icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div>
+                        <div>
+                            <h3 class="program-card__title">Личный кабинет + словарь</h3>
+                            <p class="program-card__text">Свой словарик, расписание, материалы и история успехов в одном месте.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Счётчик учеников -->
+                <div class="counter reveal">
+                    <div class="counter__value" data-counter="300" data-suffix="+">300+</div>
+                    <p class="counter__text">Уже 300+ учеников проходят этот путь — присоединяйтесь к ним</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- =========================================================
+             БЛОК 5: ПАРТНЁР STUDYCAT
+             ========================================================= -->
+        <section class="section" id="partner">
+            <div class="container">
+                <div class="partner reveal">
+                    <div class="partner__brand">
+                        <div class="partner__logo">
+                            <span class="partner__logo-mark" aria-hidden="true"><i class="fa-solid fa-cat"></i></span>
+                            <span>Studycat</span>
+                        </div>
+                        <p class="partner__text" style="margin-top: 16px;">
+                            Официальное партнёрство с международной платформой
+                            для изучения языков детьми.
+                        </p>
+                    </div>
+
+                    <div class="partner__content">
+                        <h2 class="partner__title">
+                            Мы — официальные партнёры <span class="text-gold">Studycat</span>
+                        </h2>
+                        <p class="partner__text">
+                            При оплате полугодовой программы —
+                            <span class="partner__highlight">6 месяцев доступа к приложению в подарок</span>.
+                            Ребёнок закрепляет язык в игре, а вы экономите на подписке.
+                        </p>
+                        <button class="btn btn--gold" type="button" data-modal-open="studycat-modal">
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            Узнать подробнее
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- =========================================================
+             БЛОК 6: КЕЙСЫ
+             ========================================================= -->
+        <section class="section" id="cases" style="background: var(--bg-2);">
+            <span class="watermark" style="top: 8%; left: -2%; font-size: 240px;" aria-hidden="true">话</span>
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="section__eyebrow">Истории</span>
+                    <h2 class="section__title">Дети, которыми <span class="text-gradient">гордятся</span></h2>
+                    <p class="section__subtitle">
+                        Реальные отзывы родителей о прогрессе за последние полгода.
+                    </p>
+                </div>
+
+                <div class="cases">
+                    <article class="case-card reveal">
+                        <div class="case-card__head">
+                            <div class="case-card__avatar case-card__avatar--1" aria-hidden="true">МК</div>
+                            <div>
+                                <div class="case-card__name">Маша</div>
+                                <div class="case-card__age">7 лет · 4 месяца с нами</div>
+                            </div>
+                        </div>
+                        <p class="case-card__quote">
+                            Дочка раньше плакала на английском — сейчас сама напоминает
+                            про китайский. Через 3 месяца заговорила простыми фразами.
+                        </p>
+                        <span class="case-card__achievement">
+                            <i class="fa-solid fa-star" aria-hidden="true"></i>
+                            Прошла 2 уровня · 70 слов в активе
+                        </span>
+                    </article>
+
+                    <article class="case-card reveal">
+                        <div class="case-card__head">
+                            <div class="case-card__avatar case-card__avatar--2" aria-hidden="true">АС</div>
+                            <div>
+                                <div class="case-card__name">Артём</div>
+                                <div class="case-card__age">9 лет · 8 месяцев с нами</div>
+                            </div>
+                        </div>
+                        <p class="case-card__quote">
+                            Сын просит китайский вместо мультиков. Особенно нравится
+                            ракета и открытие новых планет — это его мотивирует.
+                        </p>
+                        <span class="case-card__achievement">
+                            <i class="fa-solid fa-star" aria-hidden="true"></i>
+                            Прошёл 4 уровня · финалист школьного конкурса
+                        </span>
+                    </article>
+
+                    <article class="case-card reveal">
+                        <div class="case-card__head">
+                            <div class="case-card__avatar case-card__avatar--3" aria-hidden="true">ЛП</div>
+                            <div>
+                                <div class="case-card__name">Лера</div>
+                                <div class="case-card__age">11 лет · 1 год с нами</div>
+                            </div>
+                        </div>
+                        <p class="case-card__quote">
+                            Раньше боялась иностранных языков. Сейчас мечтает поехать
+                            в Китай и разговаривает с носителями в онлайн-клубе.
+                        </p>
+                        <span class="case-card__achievement">
+                            <i class="fa-solid fa-star" aria-hidden="true"></i>
+                            Прошла 6 уровней · HSK 1 сдан на 95%
+                        </span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- =========================================================
+             БЛОК 7: ТАРИФЫ
+             ========================================================= -->
+        <section class="section" id="pricing">
+            <span class="watermark" style="bottom: 8%; right: -2%; font-size: 260px;" aria-hidden="true">价</span>
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="section__eyebrow">Тарифы</span>
+                    <h2 class="section__title">Прозрачные <span class="text-gold">цены</span> без сюрпризов</h2>
+                    <p class="section__subtitle">
+                        Выберите подходящий старт — дальше можно перейти на любой тариф.
+                    </p>
+                </div>
+
+                <div class="pricing">
+                    <!-- Пробный -->
+                    <article class="price-card reveal">
+                        <h3 class="price-card__name">Пробный</h3>
+                        <p class="price-card__lessons">1 занятие · 30 минут</p>
+                        <div class="price-card__price">990 ₽</div>
+                        <p class="price-card__note">Знакомство с наставником</p>
+                        <ul class="price-card__list">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Полноценный урок, не демо</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Подбор программы под ребёнка</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Обратная связь родителям</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Без обязательств</li>
+                        </ul>
+                        <a href="#form" class="btn btn--ghost btn--block">Выбрать</a>
+                    </article>
+
+                    <!-- Старт -->
+                    <article class="price-card reveal">
+                        <h3 class="price-card__name">Старт</h3>
+                        <p class="price-card__lessons">8 занятий · 1 месяц</p>
+                        <div class="price-card__price">12 900 ₽</div>
+                        <p class="price-card__note">1 612 ₽ за урок</p>
+                        <ul class="price-card__list">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> 2 урока в неделю</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Личный кабинет + словарь</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> ДЗ с проверкой</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Отчёт родителям в конце месяца</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Сертификат за уровень</li>
+                        </ul>
+                        <a href="#form" class="btn btn--primary btn--block">Выбрать</a>
+                    </article>
+
+                    <!-- Полугодовой — featured -->
+                    <article class="price-card price-card--featured reveal">
+                        <span class="price-card__tag">Выгодно · −18%</span>
+                        <h3 class="price-card__name">Полугодовой</h3>
+                        <p class="price-card__lessons">24 занятия · 3 месяца</p>
+                        <div class="price-card__price">29 900 ₽</div>
+                        <p class="price-card__note">+ 6 мес. Studycat в подарок</p>
+                        <ul class="price-card__list">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Всё из тарифа «Старт»</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> 3 уровня с сертификацией</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Подготовка к HSK 1</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> 6 месяцев Studycat в подарок</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Приоритетная поддержка</li>
+                        </ul>
+                        <a href="#form" class="btn btn--gold btn--block">Выбрать</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- =========================================================
+             БЛОК 8: FAQ + ФОРМА
+             ========================================================= -->
+        <section class="section" id="faq" style="background: var(--bg-2);">
+            <span class="watermark" style="top: 10%; left: -2%; font-size: 260px;" aria-hidden="true">问</span>
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="section__eyebrow">Связаться</span>
+                    <h2 class="section__title">Вопросы и <span class="text-gradient">заявка</span></h2>
+                    <p class="section__subtitle">
+                        Собрали частые вопросы родителей. Остались — задайте в форме ниже.
+                    </p>
+                </div>
+
+                <div class="faq-form">
+                    <!-- FAQ -->
+                    <div class="faq reveal" id="faq-list">
+                        <div class="faq__item">
+                            <button class="faq__question" type="button" aria-expanded="false">
+                                <span>С какого возраста можно начать?</span>
+                                <span class="faq__icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                            </button>
+                            <div class="faq__answer">
+                                <div class="faq__answer-inner">
+                                    Мы работаем с детьми 5–12 лет. В 5–6 лет занятия строятся
+                                    вокруг игры и аудирования, с 7 лет добавляем иероглифику
+                                    и простые фразы, с 9–10 — грамматику и подготовку к HSK.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq__item">
+                            <button class="faq__question" type="button" aria-expanded="false">
+                                <span>Нужен ли опыт и знание языка родителям?</span>
+                                <span class="faq__icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                            </button>
+                            <div class="faq__answer">
+                                <div class="faq__answer-inner">
+                                    Нет. Все материалы, ДЗ и обратная связь — внутри платформы.
+                                    Родителям достаточно помогать ребёнку заходить на урок
+                                    и поддерживать его интерес. Остальное берёт на себя наставник.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq__item">
+                            <button class="faq__question" type="button" aria-expanded="false">
+                                <span>Как проходят занятия?</span>
+                                <span class="faq__icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                            </button>
+                            <div class="faq__answer">
+                                <div class="faq__answer-inner">
+                                    Онлайн, один на один с наставником, 30 или 45 минут
+                                    (зависит от возраста). Используем живую игру, карточки,
+                                    интерактивные задания и приложение Studycat для закрепления.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq__item">
+                            <button class="faq__question" type="button" aria-expanded="false">
+                                <span>Что если ребёнку не понравится?</span>
+                                <span class="faq__icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                            </button>
+                            <div class="faq__answer">
+                                <div class="faq__answer-inner">
+                                    Пробный урок — 990 ₽, без обязательств. Если после первого
+                                    месяца поймёте, что не подходит, вернём деньги за неиспользованные
+                                    занятия по пропорциональному расчёту.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq__item">
+                            <button class="faq__question" type="button" aria-expanded="false">
+                                <span>Можно ли перенести занятие?</span>
+                                <span class="faq__icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                            </button>
+                            <div class="faq__answer">
+                                <div class="faq__answer-inner">
+                                    Да, бесплатный перенос доступен при предупреждении за 12 часов
+                                    до начала. В форс-мажорных случаях решаем индивидуально —
+                                    просто напишите наставнику или нам в Telegram.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Форма -->
+                    <div class="form-card reveal" id="form">
+                        <h3 class="form-card__title">Оставьте заявку</h3>
+                        <p class="form-card__subtitle">Свяжемся в течение рабочего дня и подберём наставника.</p>
+
+                        <form id="lead-form" novalidate>
+                            <div class="form-group">
+                                <label class="form-label" for="name">Имя</label>
+                                <input class="form-control" type="text" id="name" name="name"
+                                       placeholder="Как к вам обращаться" required autocomplete="name">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Телефон</label>
+                                <input class="form-control" type="tel" id="phone" name="phone"
+                                       placeholder="+7 (___) ___-__-__" required autocomplete="tel"
+                                       inputmode="tel" maxlength="18">
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-label">Способ связи</span>
+                                <div class="radio-row" role="radiogroup" aria-label="Способ связи">
+                                    <label class="radio-pill">
+                                        <input type="radio" name="contact" value="telegram" checked>
+                                        <span class="radio-pill__box">
+                                            <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+                                            Telegram
+                                        </span>
+                                    </label>
+                                    <label class="radio-pill">
+                                        <input type="radio" name="contact" value="whatsapp">
+                                        <span class="radio-pill__box">
+                                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                            WhatsApp
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="contact-hint" id="contact-hint">
+                                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                                    Напишем в Telegram: @Lex_88
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="comment">Комментарий</label>
+                                <textarea class="form-control" id="comment" name="comment"
+                                          placeholder="Возраст ребёнка, удобное время, вопросы..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary btn--block">
+                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                                Отправить заявку
+                            </button>
+
+                            <p class="form-card__agree">
+                                Нажимая «Отправить», вы соглашаетесь с
+                                <a href="#" onclick="return false;">политикой конфиденциальности</a>.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================================
+         ПОДВАЛ
+         ========================================================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__col footer__col--brand">
+                    <a href="#hero" class="logo">
+                        <span class="logo__icon" aria-hidden="true">语</span>
+                        <span class="logo__text">Alien Chinese</span>
+                    </a>
+                    <p>
+                        Школа китайского языка для детей 5–12 лет.
+                        Влюбляем в язык с первого урока — через космос, игру и поддержку.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://t.me/Lex_88" class="contact-icon contact-icon--tg"
+                           target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                            <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://wa.me/79150135722" class="contact-icon contact-icon--wa"
+                           target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__col">
+                    <h4 class="footer__title">Навигация</h4>
+                    <ul class="footer__nav">
+                        <li><a href="#advantages">О нас</a></li>
+                        <li><a href="#program">Программа</a></li>
+                        <li><a href="#pricing">Тарифы</a></li>
+                        <li><a href="#cases">Отзывы</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4 class="footer__title">Контакты</h4>
+                    <ul class="footer__contacts">
+                        <li>
+                            <a href="tel:+79150135722">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                +7 (915) 013-57-22
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://t.me/Lex_88" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+                                Telegram: @Lex_88
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/79150135722" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                WhatsApp: +7 (915) 013-57-22
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <span>© 2026 Alien Chinese. Все права защищены.</span>
+                <span>Сделано с любовью к детям и китайскому языку · 星</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         МОДАЛЬНОЕ ОКНО: Спасибо за заявку
+         ========================================================= -->
+    <div class="modal" id="thanks-modal" role="dialog" aria-modal="true" aria-labelledby="thanks-title">
+        <div class="modal__dialog">
+            <button class="modal__close" type="button" data-modal-close aria-label="Закрыть">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <div class="modal__icon" aria-hidden="true">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="modal__title" id="thanks-title">Спасибо! Заявка отправлена</h3>
+            <p class="modal__text">
+                Мы свяжемся с вами в ближайшее время в выбранном мессенджере.
+                Хорошего дня!
+            </p>
+            <button class="btn btn--primary" type="button" data-modal-close>Понятно</button>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         МОДАЛЬНОЕ ОКНО: Подробности о Studycat
+         ========================================================= -->
+    <div class="modal" id="studycat-modal" role="dialog" aria-modal="true" aria-labelledby="studycat-title">
+        <div class="modal__dialog">
+            <button class="modal__close" type="button" data-modal-close aria-label="Закрыть">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <div class="modal__icon modal__icon--info" aria-hidden="true">
+                <i class="fa-solid fa-cat"></i>
+            </div>
+            <h3 class="modal__title" id="studycat-title">Партнёрство со Studycat</h3>
+            <div class="modal__text">
+                <p>
+                    Studycat — международная платформа для изучения языков детьми 3–12 лет.
+                    Мы — официальный партнёр в России.
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 6 месяцев премиум-доступа в подарок при полугодовом тарифе</li>
+                    <li><i class="fa-solid fa-check"></i> Дополнительные игры и задания дома</li>
+                    <li><i class="fa-solid fa-check"></i> Синхронизация с программой наших наставников</li>
+                    <li><i class="fa-solid fa-check"></i> Доступ на iOS, Android и web</li>
+                </ul>
+                <p style="font-size: 13px; color: var(--text-secondary);">
+                    Хотите воспользоваться предложением? Оставьте заявку — поможем с активацией.
+                </p>
+            </div>
+            <a href="#form" class="btn btn--gold" data-modal-close>
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                Оставить заявку
+            </a>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+    <script>
+        (function () {
+            'use strict';
+
+            /* ----------------------------------------------------
+               1) Бургер-меню для мобильной навигации
+               ---------------------------------------------------- */
+            const burger = document.getElementById('burger');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            function closeMobileMenu() {
+                burger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+                burger.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('locked');
+            }
+
+            burger.addEventListener('click', function () {
+                const isOpen = burger.classList.toggle('open');
+                mobileMenu.classList.toggle('open', isOpen);
+                burger.setAttribute('aria-expanded', String(isOpen));
+                document.body.classList.toggle('locked', isOpen);
+            });
+
+            // Закрытие меню при клике по ссылке
+            mobileMenu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Закрытие меню по Escape
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closeMobileMenu();
+                    closeAllModals();
+                }
+            });
+
+            /* ----------------------------------------------------
+               2) FAQ-аккордеон
+               ---------------------------------------------------- */
+            const faqItems = document.querySelectorAll('.faq__item');
+
+            faqItems.forEach(function (item) {
+                const btn = item.querySelector('.faq__question');
+                const answer = item.querySelector('.faq__answer');
+
+                btn.addEventListener('click', function () {
+                    const isOpen = item.classList.contains('open');
+
+                    // Закрываем все остальные
+                    faqItems.forEach(function (other) {
+                        if (other !== item) {
+                            other.classList.remove('open');
+                            other.querySelector('.faq__answer').style.maxHeight = null;
+                            other.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    if (isOpen) {
+                        item.classList.remove('open');
+                        answer.style.maxHeight = null;
+                        btn.setAttribute('aria-expanded', 'false');
+                    } else {
+                        item.classList.add('open');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        btn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+            /* ----------------------------------------------------
+               3) Маска телефона: +7 (XXX) XXX-XX-XX
+               ---------------------------------------------------- */
+            const phoneInput = document.getElementById('phone');
+
+            function formatPhone(value) {
+                // Оставляем только цифры
+                let digits = value.replace(/\D/g, '');
+
+                // Нормализуем: первая цифра должна быть 7
+                if (digits.charAt(0) === '8') {
+                    digits = '7' + digits.slice(1);
+                }
+                if (digits.charAt(0) !== '7') {
+                    digits = '7' + digits;
+                }
+                // Ограничиваем 11 цифрами
+                digits = digits.substring(0, 11);
+
+                let out = '+7';
+                if (digits.length > 1)  out += ' (' + digits.substring(1, 4);
+                if (digits.length >= 4) out += ') ' + digits.substring(4, 7);
+                if (digits.length >= 7) out += '-' + digits.substring(7, 9);
+                if (digits.length >= 9) out += '-' + digits.substring(9, 11);
+                return out;
+            }
+
+            phoneInput.addEventListener('input', function (e) {
+                e.target.value = formatPhone(e.target.value);
+            });
+
+            // Подставляем +7 при фокусе на пустое поле
+            phoneInput.addEventListener('focus', function (e) {
+                if (!e.target.value) e.target.value = '+7 (';
+            });
+
+            // Корректная обработка Backspace в начале поля
+            phoneInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && e.target.value.replace(/\D/g, '').length <= 1) {
+                    e.preventDefault();
+                    e.target.value = '';
+                }
+            });
+
+            /* ----------------------------------------------------
+               4) Динамическая подсказка способа связи
+               ---------------------------------------------------- */
+            const contactRadios = document.querySelectorAll('input[name="contact"]');
+            const contactHint = document.getElementById('contact-hint');
+
+            function updateContactHint() {
+                const checked = document.querySelector('input[name="contact"]:checked').value;
+                if (checked === 'telegram') {
+                    contactHint.innerHTML = '<i class="fa-solid fa-circle-info" aria-hidden="true"></i> Напишем в Telegram: @Lex_88';
+                } else {
+                    contactHint.innerHTML = '<i class="fa-solid fa-circle-info" aria-hidden="true"></i> Напишем в WhatsApp: +7 (915) 013-57-22';
+                }
+            }
+
+            contactRadios.forEach(function (radio) {
+                radio.addEventListener('change', updateContactHint);
+            });
+
+            /* ----------------------------------------------------
+               5) Модальные окна
+               ---------------------------------------------------- */
+            const modals = document.querySelectorAll('.modal');
+
+            function openModal(id) {
+                const modal = document.getElementById(id);
+                if (!modal) return;
+                modal.classList.add('open');
+                document.body.classList.add('locked');
+                // Перенос фокуса на кнопку закрытия для доступности
+                const closeBtn = modal.querySelector('[data-modal-close]');
+                if (closeBtn) closeBtn.focus();
+            }
+
+            function closeModal(modal) {
+                modal.classList.remove('open');
+                // Снимаем блокировку, если нет открытого меню
+                if (!burger.classList.contains('open')) {
+                    document.body.classList.remove('locked');
+                }
+            }
+
+            function closeAllModals() {
+                modals.forEach(closeModal);
+            }
+
+            // Открытие по data-атрибуту
+            document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    openModal(btn.getAttribute('data-modal-open'));
+                });
+            });
+
+            // Закрытие
+            document.querySelectorAll('[data-modal-close]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const modal = btn.closest('.modal');
+                    if (modal) closeModal(modal);
+                });
+            });
+
+            // Клик по затемнённому фону
+            modals.forEach(function (modal) {
+                modal.addEventListener('click', function (e) {
+                    if (e.target === modal) closeModal(modal);
+                });
+            });
+
+            /* ----------------------------------------------------
+               6) Отправка формы (имитация)
+               ---------------------------------------------------- */
+            const form = document.getElementById('lead-form');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Простая валидация
+                const name = form.querySelector('#name').value.trim();
+                const phone = form.querySelector('#phone').value.trim();
+                const phoneDigits = phone.replace(/\D/g, '');
+
+                if (name.length < 2) {
+                    alert('Пожалуйста, укажите имя.');
+                    form.querySelector('#name').focus();
+                    return;
+                }
+                if (phoneDigits.length < 11) {
+                    alert('Пожалуйста, укажите корректный номер телефона.');
+                    form.querySelector('#phone').focus();
+                    return;
+                }
+
+                // Имитация запроса на сервер
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Отправляем...';
+
+                setTimeout(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    form.reset();
+                    updateContactHint();
+                    openModal('thanks-modal');
+                }, 800);
+            });
+
+            /* ----------------------------------------------------
+               7) Появление блоков при скролле (Intersection Observer)
+               ---------------------------------------------------- */
+            const reveals = document.querySelectorAll('.reveal');
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.12,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                reveals.forEach(function (el) {
+                    observer.observe(el);
+                });
+            } else {
+                // Фолбэк: просто показываем все
+                reveals.forEach(function (el) {
+                    el.classList.add('visible');
+                });
+            }
+
+            /* ----------------------------------------------------
+               8) Анимация счётчика (когда блок видим)
+               ---------------------------------------------------- */
+            const counterEl = document.querySelector('[data-counter]');
+            if (counterEl && 'IntersectionObserver' in window) {
+                const counterObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            animateCounter(counterEl);
+                            counterObserver.unobserve(counterEl);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                counterObserver.observe(counterEl);
+            }
+
+            function animateCounter(el) {
+                const target = parseInt(el.getAttribute('data-counter'), 10) || 0;
+                const suffix = el.getAttribute('data-suffix') || '';
+                const duration = 1500;
+                const startTime = performance.now();
+
+                function step(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    // easeOutCubic
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const value = Math.round(target * eased);
+                    el.textContent = value + suffix;
+                    if (progress < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            /* ----------------------------------------------------
+               9) Подсветка шапки при скролле
+               ---------------------------------------------------- */
+            const header = document.querySelector('.header');
+            let lastScroll = 0;
+
+            window.addEventListener('scroll', function () {
+                const y = window.scrollY;
+                if (y > 20) {
+                    header.style.background = 'rgba(11, 14, 26, 0.92)';
+                    header.style.boxShadow = '0 10px 30px -10px rgba(0, 0, 0, 0.5)';
+                } else {
+                    header.style.background = 'rgba(11, 14, 26, 0.7)';
+                    header.style.boxShadow = 'none';
+                }
+                lastScroll = y;
+            }, { passive: true });
+
+        })();
+    </script>
+</body>
+</html>
